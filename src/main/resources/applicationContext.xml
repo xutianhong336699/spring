@@ -7,7 +7,7 @@
 
     <bean id="car" class="etity.Car">
         <property name="brand" value="宝马"></property>
-        <property name="color" value="银色"></property>
+        <property name="color" value="黑色"></property>
     </bean>
 
     <bean id="person" class="etity.Person">
