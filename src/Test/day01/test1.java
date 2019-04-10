@@ -33,11 +33,7 @@ public class test1 {
         // 从容器中获取指定的Bean , <-- "hellowService" 是xml配置文件里面的id -->
         Printer printer = ctx.getBean("printer", Printer.class);
         printer.print();
+        System.out.println("111111111111111111111");
     }
 
-    @Test
-    public void test(){
-        int[] nums = new int[]{1,2,3,4,5};
-        System.out.println(nums.length);
-    }
 }
