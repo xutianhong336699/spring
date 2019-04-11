@@ -5,7 +5,7 @@ public class Printer {
     private Paper paper;
 
     public void print(){
-        System.out.println("我再用惠普的"+ink.getColor()+"打印机打印"+paper.getSize());
+        System.out.println("我在用惠普的"+ink.getColor()+"打印机打印"+paper.getSize());
     }
 
     public Ink getInk() {

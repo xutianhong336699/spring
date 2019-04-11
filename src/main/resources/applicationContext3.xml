@@ -19,4 +19,5 @@
         <aop:pointcut id="mypoint" expression="execution(* cn.day03.service.UserServiceImpl.save*(..))"></aop:pointcut>
         <aop:advisor advice-ref="beforeadvice" pointcut-ref="mypoint"></aop:advisor>
     </aop:config>
+
 </beans>

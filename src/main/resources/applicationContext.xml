@@ -3,16 +3,18 @@
            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
            xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-    <bean id="hellowService" class="cn.day01.HelloService"></bean>
+    <bean id="helloService" class="cn.day01.HelloService">
+        <property name="info" value="hello world"></property>
+    </bean>
 
-    <bean id="car" class="etity.Car">
+    <bean id="car" class="cn.day01.Car">
         <property name="brand" value="宝马"></property>
         <property name="color" value="黑色"></property>
     </bean>
 
-    <bean id="person" class="etity.Person">
+    <bean id="person" class="cn.day01.Person">
         <property name="age" value="20"></property>
-        <property name="name" value="北大青鸟"></property>
+        <property name="name" value="大胃王"></property>
         <property name="car" ref="car"></property>
     </bean>
 

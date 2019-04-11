@@ -9,7 +9,7 @@
         <property name="address" value="北京海淀"></property>
     </bean>
 
-    <!--构造命名注入-->
+    <!--构造注入-->
     <bean id="userinfo" class="cn.day04ConstructInjection.entity.UserInfo">
         <constructor-arg index="0" type="java.lang.Integer" value="1"></constructor-arg>
         <constructor-arg index="1" type="java.lang.String" value="徐田红"></constructor-arg>

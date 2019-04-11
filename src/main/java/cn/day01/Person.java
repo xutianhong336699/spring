@@ -1,4 +1,4 @@
-package etity;
+package cn.day01;
 
 public class Person {
     private String name;
