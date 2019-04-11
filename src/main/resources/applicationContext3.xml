@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+    <!--Dao实现类-->
+    <bean id="userdaoimpl" class="cn.day03.dao.UserDaoImpl"></bean>
+
+    <!--Service实现类-->
+    <bean id="userserviceimpl" class="cn.day03.service.UserServiceImpl">
+        <property name="userDao" ref="userdaoimpl"></property>
+    </bean>
+
+    <!--增强类-->
+    <bean id="beforeadvice" class="cn.day03.advice.myBeforeAdvice"></bean>
+
+    <!--绑定AOP-->
+    <aop:config>
+        <aop:pointcut id="mypoint" expression="execution(* cn.day03.service.UserServiceImpl.save*(..))"></aop:pointcut>
+        <aop:advisor advice-ref="beforeadvice" pointcut-ref="mypoint"></aop:advisor>
+    </aop:config>
+</beans>

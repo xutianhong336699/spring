@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd ">
+
+    <!--地址-->
+    <bean id="address" class="cn.day04ConstructInjection.entity.Address">
+        <property name="address" value="北京海淀"></property>
+    </bean>
+
+    <!--构造命名注入-->
+    <bean id="userinfo" class="cn.day04ConstructInjection.entity.UserInfo">
+        <constructor-arg index="0" type="java.lang.Integer" value="1"></constructor-arg>
+        <constructor-arg index="1" type="java.lang.String" value="徐田红"></constructor-arg>
+        <constructor-arg index="2" type="cn.day04ConstructInjection.entity.Address" ref="address"></constructor-arg>
+    </bean>
+
+    <!--p命名空间注入-->
+    <bean id="user" class="cn.day04ConstructInjection.entity.UserInfo" p:id="2" p:name="北大青鸟" p:address-ref="address"></bean>
+
+</beans>

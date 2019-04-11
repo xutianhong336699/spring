@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd ">
+
+    <!--autowire自动注入 此处id的值跟Emp实体类里面的域属性dept相同，故也可以用 autowire="byName"-->
+    <bean id="dept" class="cn.day05autowire.entity.Dept">
+        <property name="deptno" value="1"></property>
+        <property name="deptname" value="前期部"></property>
+    </bean>
+
+    <bean id="emp" class="cn.day05autowire.entity.Emp" autowire="byType">
+        <property name="empno" value="001"></property>
+        <property name="empname" value="周星星"></property>
+    </bean>
+
+</beans>
