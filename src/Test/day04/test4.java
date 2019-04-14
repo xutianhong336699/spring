@@ -1,6 +1,6 @@
 package day04;
 
-import cn.day04ConstructInjection.entity.UserInfo;
+import cn.day04constructInjection.entity.UserInfo;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;

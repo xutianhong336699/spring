@@ -1,4 +1,4 @@
-package cn.day04ConstructInjection.entity;
+package cn.day04constructInjection.entity;
 
 public class Address {
     private String address;

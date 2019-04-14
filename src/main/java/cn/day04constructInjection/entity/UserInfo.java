@@ -1,4 +1,4 @@
-package cn.day04ConstructInjection.entity;
+package cn.day04constructInjection.entity;
 
 public class UserInfo {
     private Integer id;
