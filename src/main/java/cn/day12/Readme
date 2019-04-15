@@ -1,0 +1,13 @@
+
+
+
+        经典AOP---代理工厂bean（ProxyFactoryBean）：4 种
+        < 前置增强 后置增强 环绕增强 异常增强 >
+
+        前置增强 MethodBeforeAdvice----->before
+
+        后置增强 AfterReturningAdvice--->afterReturning
+
+        环绕增强 MethodInterceptor ---->invoke
+
+        异常增强 ThrowsAdvice--------->afterThrowing
