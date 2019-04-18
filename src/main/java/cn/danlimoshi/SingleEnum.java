@@ -14,3 +14,12 @@ public enum SingleEnum {
         System.out.println(singleEnum.getName());
     }
 }
+
+/*
+        public enum  EnumSingleton {
+            INSTANCE;
+            public EnumSingleton getInstance(){
+                return INSTANCE;
+            }
+        }
+*/

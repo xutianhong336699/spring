@@ -1,0 +1,41 @@
+
+1.导入依赖 (mysql c3p0 前面已经导过)
+
+<!-- https://mvnrepository.com/artifact/commons-dbutils/commons-dbutils -->
+<dependency>
+    <groupId>commons-dbutils</groupId>
+    <artifactId>commons-dbutils</artifactId>
+    <version>1.6</version>
+</dependency>
+
+2.创建数据库表  语法：字段名前面不能有空格
+ CREATE TABLE IF NOT EXISTS `user` (
+   `id` INT(11) NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(50) DEFAULT NULL ,
+   `pwd` VARCHAR(50) DEFAULT NULL ,
+   PRIMARY KEY (`id`)
+ ) ;
+
+
+ 3.配置 c3p0-config.xml 文件 , c3p0框架默认加载该配置
+
+ 4.工具包 JDBCutil    /    entity实体类
+
+ 5.测试代码
+
+ 总结：DbUtils给我们提供了10个ResultSetHandler(查询的接口)实现类，分别是：
+         ①ArrayHandler：     将查询结果的第一行数据，保存到Object数组中
+         ②ArrayListHandler     将查询的结果，每一行先封装到Object数组中，然后将数据存入List集合
+         ③BeanHandler     将查询结果的第一行数据，封装到user对象
+         ④BeanListHandler     将查询结果的每一行封装到user对象，然后再存入List集合
+         ⑤ColumnListHandler     将查询结果的指定列的数据封装到List集合中
+         ⑥MapHandler     将查询结果的第一行数据封装到map结合（key==列名，value==列值）
+         ⑦MapListHandler     将查询结果的每一行封装到map集合（key==列名，value==列值），再将map集合存入List集合
+         ⑧BeanMapHandler     将查询结果的每一行数据，封装到User对象，再存入mao集合中（key==列名，value==列值）
+         ⑨KeyedHandler     将查询的结果的每一行数据，封装到map1（key==列名，value==列值 ），然后将map1集合（有多个）存入map2集合（只有一个）
+         ⑩ScalarHandler     封装类似count、avg、max、min、sum......函数的执行结果
+
+
+学习博客地址：https://www.cnblogs.com/CQY1183344265/p/5854418.html
+
+

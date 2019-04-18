@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+   <!--目标类-->
+   <bean id="helloService" class="cn.day18auto02.HelloService"></bean>
+
+   <!--目标类-->
+   <bean id="anyService" class="cn.day18auto02.AnyService"></bean>
+
+   <!--增强类-->
+   <bean id="afterAdvice" class="cn.day18auto02.MyAfterAdvice"></bean>
+
+   <!--正则方法切入点顾问-->
+   <bean id="myAdvisor" class="org.springframework.aop.support.RegexpMethodPointcutAdvisor">
+      <property name="advice" ref="afterAdvice"></property>
+      <property name="patterns" value=".*do.*"></property>
+   </bean>
+
+   <bean class="org.springframework.aop.framework.autoproxy.BeanNameAutoProxyCreator">
+      <property name="interceptorNames" value="myAdvisor"></property>
+      <property name="beanNames" value="helloService,anyService"></property>
+   </bean>
+
+</beans>
