@@ -2,8 +2,8 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:context="http://www.springframework.org/schema/context"
-       xmlns:aop="http://www.springframework.org/schema/aop"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
+       xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
    <context:property-placeholder location="classpath:jdbc1.properties"></context:property-placeholder>
 
    <!--JDBC数据源-->
@@ -33,17 +33,34 @@
    </bean>
 
    <!--事务处理-->
+
    <!--方式一：事务代理工厂Bean-->
-   <bean id="proxyBean" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+  <!-- <bean id="proxyBean" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
       <property name="transactionManager" ref="transactionManager"></property>
       <property name="target" ref="stockService"></property>
-      <!--事务属性   隔离级别  传播行为-->
+      &lt;!&ndash;事务属性   隔离级别  传播行为&ndash;&gt;
       <property name="transactionAttributes">
          <props>
             <prop key="buyStock">ISOLATION_DEFAULT,PROPAGATION_REQUIRED,-MyException</prop>
          </props>
-
       </property>
-   </bean>
+   </bean>-->
+
+   <!--方式二：注解驱动-->
+   <!--<tx:annotation-driven transaction-manager="transactionManager"></tx:annotation-driven>-->
+
+   <!--方式三：aspectj方式 -->
+   <tx:advice id="stockAdvice" transaction-manager="transactionManager">
+      <tx:attributes>
+         <!--对所有需要事务环境的方法的事务属性策略的一个具体细化操作-->
+         <tx:method name="buy*" isolation="DEFAULT" propagation="REQUIRED" rollback-for="MyException" />
+         <tx:method name="select*" isolation="DEFAULT" propagation="REQUIRED" read-only="true" />
+      </tx:attributes>
+   </tx:advice>
+
+   <aop:config>
+      <aop:pointcut id="mypoint" expression="execution(* *..service.StockServiceImpl.*(..))"></aop:pointcut>
+      <aop:advisor advice-ref="stockAdvice" pointcut-ref="mypoint"></aop:advisor>
+   </aop:config>
 
 </beans>

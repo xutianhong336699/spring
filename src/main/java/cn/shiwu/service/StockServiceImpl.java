@@ -3,6 +3,10 @@ package cn.shiwu.service;
 import cn.shiwu.entity.MyException;
 import cn.shiwu.dao.AccountDao;
 import cn.shiwu.dao.StockDao;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 public class StockServiceImpl implements StockService{
     private AccountDao accountDao;
@@ -25,6 +29,7 @@ public class StockServiceImpl implements StockService{
     }
 
     @Override
+    // @Transactional(isolation= Isolation.DEFAULT,propagation= Propagation.REQUIRED,rollbackFor = MyException.class)  注解驱动方法
     public int buyStock(int aid, int money, int sid, int count) throws MyException {
         boolean isBuy=true;
         // 账户金额减少

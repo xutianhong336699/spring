@@ -19,6 +19,7 @@
       <property name="patterns" value=".*do.*"></property>
    </bean>
 
+   <!--自动代理方式二, BeanNameAutoProxyCreator -->
    <bean class="org.springframework.aop.framework.autoproxy.BeanNameAutoProxyCreator">
       <property name="interceptorNames" value="myAdvisor"></property>
       <property name="beanNames" value="helloService,anyService"></property>

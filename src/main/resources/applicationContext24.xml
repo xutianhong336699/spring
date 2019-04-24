@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
+
+   <context:property-placeholder location="classpath:jdbc.properties"></context:property-placeholder>
+
+   <!--阿里的druid-->
+   <bean id="datasource" class="com.alibaba.druid.pool.DruidDataSource">
+      <property name="driverClassName" value="${jdbc.driver}"></property>
+      <property name="url" value="${jdbc.url}"></property>
+      <property name="username" value="${jdbc.username}"></property>
+      <property name="password" value="${jdbc.password}"></property>
+      <property name="maxActive" value="20"></property>   <!--最大连接池数量-->
+      <property name="initialSize" value="5"></property>  <!--初始化时建立物理连接的个数-->
+      <property name="minIdle" value="1"></property>      <!--最小连接池数量-->
+      <property name="maxWait" value="60000"></property>  <!--获取连接时最大等待时间，单位毫秒-->
+   </bean>
+
+   <!-- 扫描到dao层 -->
+   <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+      <property name="basePackage" value="cn.day24ssm.dao"></property>
+   </bean>
+
+   <!--此处的id 可要可不要-->
+   <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+      <property name="dataSource" ref="datasource"></property>
+      <property name="configLocation" value="classpath:mybaits.xml"></property>
+   </bean>
+
+   <bean id="bookService" class="cn.day24ssm.service.BookServiceImpl">
+      <property name="bookDao" ref="bookDao"></property>
+   </bean>
+
+   <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+      <property name="dataSource" ref="datasource"></property>
+   </bean>
+
+   <tx:advice id="bookAdvice" transaction-manager="transactionManager">
+      <tx:attributes>
+         <!--对所有需要事务环境的方法的事务属性策略的一个具体细化操作-->
+         <tx:method name="add*" isolation="DEFAULT" propagation="REQUIRED" rollback-for="MyException"/>
+         <tx:method name="select*" isolation="DEFAULT" propagation="REQUIRED" read-only="true" />
+      </tx:attributes>
+   </tx:advice>
+
+   <aop:config>
+      <aop:pointcut id="mypoint" expression="execution(* *.day24ssm.service.BookServiceImpl.*(..))"></aop:pointcut>
+      <aop:advisor advice-ref="bookAdvice" pointcut-ref="mypoint"></aop:advisor>
+   </aop:config>
+
+</beans>

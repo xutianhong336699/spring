@@ -1,24 +1,9 @@
-package cn.day22.entity;
-
+package cn.day24ssm.entity;
 
 public class Book {
     private Integer bookid;
     private String bookname;
     private Integer bookprice;
-
-    public Book() {
-    }
-
-    public Book(String bookname, Integer bookprice) {
-        this.bookname = bookname;
-        this.bookprice = bookprice;
-    }
-
-    public Book(Integer bookid, String bookname, Integer bookprice) {
-        this.bookid = bookid;
-        this.bookname = bookname;
-        this.bookprice = bookprice;
-    }
 
     public Integer getBookid() {
         return bookid;
